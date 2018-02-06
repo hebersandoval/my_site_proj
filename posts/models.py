@@ -10,8 +10,9 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     # used in python 3
-    # def __str__(self):
-    #     return self.title
+    def __str__(self):
+        return self.title
 
+    # used in python 2
     def __unicode__(self):
         return self.title
