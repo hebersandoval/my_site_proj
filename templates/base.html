@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block head_title %}My Site{% endblock head_title %}</title>
+</head>
+<body>
+    {% include "partials/messages.html" %}
+
+    <div class="container">
+        {% block content %}
+            <h2>Homepage here</h2>
+        {% endblock content %}
+    </div>
+</body>
+</html>

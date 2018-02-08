@@ -14,8 +14,6 @@ def post_create(request):
         post.save()
         messages.success(request, 'Successfully created!')
         return HttpResponseRedirect(post.get_absolute_url())
-    else:
-        messages.error(request, 'Could not create your post!')
     context = {
         'form': form,
     }

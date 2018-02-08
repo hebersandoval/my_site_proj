@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h2>{{ title }} is working</h2>
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ title }} Page</h2>
 
     {% for post in posts  %}
         <!-- <h3><a href="{% url 'posts:detail' id=post.id %}">{{ post.title }}</a> ({{ post.id }})</h3> -->
@@ -15,6 +9,4 @@
         <p>{{ post.timestamp }} | {{ post.updated }}</p>
         <p>{{ post.content }}</p>
     {% endfor %}
-
-</body>
-</html>
+{% endblock content %}
