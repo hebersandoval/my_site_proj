@@ -3,10 +3,22 @@ from django.http import HttpResponse
 
 # Create your views here.
 from .models import Post
+from .forms import PostForm
 
 # function base views
 def post_create(request):
-    return HttpResponse('<h1>Create</h1>')
+    form = PostForm(request.POST or None)
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.save()
+        
+    # if request.method == 'POST':
+    #     print request.POST.get('title')
+    #     print request.POST.get('content')
+    context = {
+        'form': form,
+    }
+    return render(request, 'posts/form.html', context)
 
 def post_detail(request, id=None):
     post = get_object_or_404(Post, id=id)
