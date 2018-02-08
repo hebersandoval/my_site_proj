@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 from .models import Post
 from .forms import PostForm
+from django.contrib import messages
 
 # function base views
 def post_create(request):
@@ -11,8 +12,10 @@ def post_create(request):
     if form.is_valid():
         post = form.save(commit=False)
         post.save()
-        # message update success
+        messages.success(request, 'Successfully created!')
         return HttpResponseRedirect(post.get_absolute_url())
+    else:
+        messages.error(request, 'Could not create your post!')
     context = {
         'form': form,
     }
@@ -40,7 +43,7 @@ def post_update(request, id=None):
     if form.is_valid():
         post = form.save(commit=False)
         post.save()
-        # message update success
+        messages.success(request, 'Successfully updated!')
         return HttpResponseRedirect(post.get_absolute_url())
     context = {
         'title': 'Update',
