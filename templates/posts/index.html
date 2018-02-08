@@ -1,12 +1,37 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <h2>{{ title }} Page</h2>
+{% block head_title %}Posts | {{ block.super }}{% endblock head_title %}
 
-    {% for post in posts  %}
-        <!-- <h3><a href="{% url 'posts:detail' id=post.id %}">{{ post.title }}</a> ({{ post.id }})</h3> -->
-        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> ({{ post.id }})</h3>
-        <p>{{ post.timestamp }} | {{ post.updated }}</p>
-        <p>{{ post.content }}</p>
-    {% endfor %}
+{% block content %}
+{% include "partials/splash_screen.html" %}
+
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8 blog-main">
+                <h3 class="pb-3 mb-4 font-italic border-bottom">
+                    From the Firehose
+                </h3>
+                
+                {% for post in posts  %}
+                <div class="blog-post">
+                    <h2 class="blog-post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                    <p class="blog-post-meta">{{ post.timestamp }} - January 1, 2014 by <a href="#">Mark</a></p>
+        
+                    <p>{{ post.content }}</p>
+                </div><!-- /.blog-post -->
+                <hr>
+                {% endfor %}
+        
+                <nav class="blog-pagination">
+                    <a class="btn btn-outline-primary" href="#">Older</a>
+                    <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+                </nav>
+
+            </div><!-- /.blog-main -->
+
+            {% include "partials/aside.html" %}
+
+        </div><!-- /.row -->
+
+    </main><!-- /.container -->
 {% endblock content %}

@@ -3,11 +3,33 @@
 {% block head_title %}{{ post.title }} | {{ block.super }}{% endblock head_title %}
 
 {% block content %}
-    <h2>{{ title }} Page</h2>
+{% include "partials/splash_screen.html" %}
 
-    <h3>{{ post.title }} ({{ post.id }})</h3>
-    <p>{{ post.timestamp }} | {{ post.updated }}</p>
-    <p>{{ post.content }}</p>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8 blog-main">
+                <h3 class="pb-3 mb-4 font-italic border-bottom">
+                    From the Firehose
+                </h3>
+                
+                <div class="blog-post">
+                    <h2 class="blog-post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                    <p class="blog-post-meta">{{ post.timestamp }} - January 1, 2014 by <a href="#">Mark</a></p>
+        
+                    <p>{{ post.content }}</p>
+                </div><!-- /.blog-post -->
+        
+                <nav class="blog-pagination">
+                    <a class="btn btn-outline-primary" href="#">Previous</a>
+                    <a class="btn btn-outline-secondary disabled" href="#">Next</a>
+                </nav>
 
-    <a href="/posts/">Back</a>
+                <a href="/posts/">Back</a>
+            </div><!-- /.blog-main -->
+
+            {% include "partials/aside.html" %}
+
+        </div><!-- /.row -->
+
+    </main><!-- /.container -->
 {% endblock content %}
