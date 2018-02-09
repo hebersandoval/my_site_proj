@@ -15,10 +15,11 @@
     <title>{% block head_title %}My Site{% endblock head_title %}</title>
 </head>
 <body>
-    {% include "partials/messages.html" %}
-
+    
     <div class="container">
         {% include "partials/header.html" %}
+        
+        {% include "partials/messages.html" %}
 
         <!-- partials/splash_screen moved inside block content (see below) -->
         

@@ -15,16 +15,30 @@
                 {% for post in posts  %}
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-                    <p class="blog-post-meta">{{ post.timestamp }} - January 1, 2014 by <a href="#">Mark</a></p>
+                    <p class="blog-post-meta">{{ post.timestamp|timesince }} - January 1, 2014 by <a href="#">Mark</a></p>
         
-                    <p>{{ post.content }}</p>
+                    <p>{{ post.content|linebreaks|truncatechars:250 }}</p>
                 </div><!-- /.blog-post -->
                 <hr>
                 {% endfor %}
         
                 <nav class="blog-pagination">
-                    <a class="btn btn-outline-primary" href="#">Older</a>
-                    <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+                    <!-- <a class="btn btn-outline-primary" href="#">Older</a>
+                    <a class="btn btn-outline-secondary disabled" href="#">Newer</a> -->
+
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if posts.has_previous %}
+                                <a class="btn btn-outline-primary" href="?{{ page_request_var }}={{ posts.previous_page_number }}">Prev</a>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+                            </span>
+                            {% if posts.has_next %}
+                                <a class="btn btn-outline-primary" href="?{{ page_request_var }}={{ posts.next_page_number }}">Next</a>
+                            {% endif %}
+                        </span>
+                    </div>
                 </nav>
 
             </div><!-- /.blog-main -->

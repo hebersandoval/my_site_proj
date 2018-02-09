@@ -1,10 +1,11 @@
+from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 from .models import Post
 from .forms import PostForm
-from django.contrib import messages
 
 # function base views
 def post_create(request):
@@ -28,10 +29,22 @@ def post_detail(request, id=None):
     return render(request, 'posts/detail.html', context)
 
 def post_list(request):
-    posts = Post.objects.all()
+    posts_list = Post.objects.all()
+    paginator = Paginator(posts_list, 3) # show 3 posts per page
+    page_request_var = 'pagina'
+    page = request.GET.get(page_request_var)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        # if page is out of range (e.g. 9999), deliver last page of results
+        posts = paginator.page(paginator.num_pages)
     context = {
         'title': 'List',
         'posts': posts,
+        'page_request_var': page_request_var
     }
     return render(request, 'posts/index.html', context)
 
