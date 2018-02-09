@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^$', 'my_site_proj.views.home'),
     url(r'^admin/', admin.site.urls),
     # url(r'^posts/$', '<app_name>.views.<function_name>'),
     url(r'^posts/', include('posts.urls', namespace='posts')),
