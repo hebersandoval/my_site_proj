@@ -15,8 +15,12 @@
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
                     <p class="blog-post-meta">{{ post.timestamp }} - January 1, 2014 by <a href="#">Mark</a></p>
+
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="img-responsive" alt="">                    
+                    {% endif %}
         
-                    <p>{{ post.content }}</p>
+                    <p>{{ post.content|linebreaks }}</p>
                 </div><!-- /.blog-post -->
         
                 <nav class="blog-pagination">
