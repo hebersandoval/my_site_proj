@@ -16,11 +16,15 @@
                     <h2 class="blog-post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
                     <p class="blog-post-meta">{{ post.timestamp }} - January 1, 2014 by <a href="#">Mark</a></p>
 
+                    <!-- Shareable links -->
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Share on Facebook</a> |
+                    <a href="https://www.twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">Share on Twitter</a>
+
                     {% if post.image %}
                         <img src="{{ post.image.url }}" class="img-responsive" alt="">                    
                     {% endif %}
         
-                    <p>{{ post.content|linebreaks }}</p>
+                    <p>{{ post.content|linebreaks }}</p>                    
                 </div><!-- /.blog-post -->
         
                 <nav class="blog-pagination">
